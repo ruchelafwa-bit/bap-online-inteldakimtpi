@@ -1997,9 +1997,37 @@ async function downloadBuktiPDF(){
 
 async function downloadBuktiPDFFromDash(){
   if(!currentRegData) return;
-  const tglStr = currentRegData.tanggal ? (() => {
-    try{ return new Date(currentRegData.tanggal+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}); }catch(e){ return currentRegData.tanggal; }
-  })() : '-';
+
+  const rsStatus = currentRegData.reschedule_status || '';
+  const fmtTgl = (tgl) => {
+    if(!tgl) return '-';
+    try{ return new Date(tgl+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
+    catch(e){ return tgl; }
+  };
+
+  // Jadwal yang berlaku resmi: jika reschedule sudah Disetujui, pakai jadwal baru.
+  // Jika masih Pending, jadwal LAMA tetap yang berlaku sampai disetujui petugas.
+  let jadwalAktifTgl = currentRegData.tanggal;
+  let jadwalAktifJam = currentRegData.jam;
+  if(rsStatus === 'Disetujui' && currentRegData.reschedule_tanggal){
+    jadwalAktifTgl = currentRegData.reschedule_tanggal;
+    jadwalAktifJam = currentRegData.reschedule_jam;
+  }
+
+  // ── FIX BUG: jadwal LAMA yang benar untuk PDF ──
+  // Setelah reschedule Disetujui, kolom tanggal/jam di sheet SUDAH ditimpa
+  // menjadi jadwal baru oleh Apps Script (approveReschedule). Jadi untuk
+  // menampilkan "Jadwal Semula" yang benar, kita HARUS ambil dari kolom
+  // tanggal_lama/jam_lama (kolom baru yang disimpan sebelum di-overwrite),
+  // bukan dari tanggal/jam yang sudah berubah.
+  // Kalau masih Pending, kolom tanggal/jam memang masih yang lama (belum disentuh).
+  let tanggalLamaVal = currentRegData.tanggal;
+  let jamLamaVal      = currentRegData.jam;
+  if(rsStatus === 'Disetujui'){
+    tanggalLamaVal = currentRegData.tanggal_lama || currentRegData.tanggal;
+    jamLamaVal      = currentRegData.jam_lama      || currentRegData.jam;
+  }
+
   const d = {
     nomorRegistrasi: currentRegData.no_registrasi,
     nama:            currentRegData.nama,
@@ -2011,13 +2039,14 @@ async function downloadBuktiPDFFromDash(){
     jenisPaspor:     currentRegData.jenis_paspor,
     tujuan:          currentRegData.tujuan,
     dokumen:         'Dokumen telah diupload',
-    jadwal:          (() => {
-      try{
-        const dt = new Date(currentRegData.tanggal+'T00:00:00');
-        return dt.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+', '+(currentRegData.jam||'')+' WIB';
-      }catch(e){ return currentRegData.tanggal+', '+currentRegData.jam; }
-    })(),
-    waktuDaftar: currentRegData.waktu_daftar,
+    jadwal:          fmtTgl(jadwalAktifTgl)+', '+(jadwalAktifJam||'-')+' WIB',
+    waktuDaftar:     currentRegData.waktu_daftar,
+    reschedule: rsStatus ? {
+      status:       rsStatus,
+      tanggalLama:  fmtTgl(tanggalLamaVal)+', '+(jamLamaVal||'-')+' WIB',
+      tanggalBaru:  fmtTgl(currentRegData.reschedule_tanggal)+', '+(currentRegData.reschedule_jam||'-')+' WIB',
+      alasan:       currentRegData.reschedule_alasan || '-',
+    } : null,
   };
   await generatePDF(d);
 }
@@ -2113,6 +2142,44 @@ async function generatePDF(d){
   doc.setFillColor(14,165,233); doc.roundedRect(margin+3,y+3,8,8,1,1,'F');
   doc.setTextColor(3,105,161); doc.setFontSize(9); doc.setFont('helvetica','bold');
   doc.text(d.jadwal||'-',margin+14,y+8.5); y+=jadwalH+4;
+
+  // ─── Blok Informasi Reschedule (hanya muncul jika pernah mengajukan reschedule) ───
+  if(d.reschedule){
+    const rs = d.reschedule;
+    const rsColors = {
+      'Pending':   { bg:[255,247,237], border:[249,115,22], text:[194,65,12],  label:'MENUNGGU PERSETUJUAN PETUGAS' },
+      'Disetujui': { bg:[208,240,224], border:[15,138,80],  text:[10,92,53],   label:'DISETUJUI PETUGAS' },
+      'Ditolak':   { bg:[254,242,242], border:[220,38,38],  text:[153,27,27],  label:'DITOLAK PETUGAS' },
+    };
+    const rc = rsColors[rs.status] || rsColors['Pending'];
+
+    drawSectionHeader('INFORMASI RESCHEDULE');
+
+    const lamaLines = doc.splitTextToSize('Jadwal Semula: '+rs.tanggalLama, contentW-14);
+    const baruLines = doc.splitTextToSize('Jadwal Diajukan: '+rs.tanggalBaru, contentW-14);
+    const alasanLines = doc.splitTextToSize('Alasan: '+rs.alasan, contentW-14);
+    const rsBoxH = 8 + (lamaLines.length+baruLines.length+alasanLines.length)*4.3 + 6;
+
+    doc.setFillColor(rc.bg[0],rc.bg[1],rc.bg[2]);
+    doc.roundedRect(margin,y,contentW,rsBoxH,3,3,'F');
+    doc.setDrawColor(rc.border[0],rc.border[1],rc.border[2]);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(margin,y,contentW,rsBoxH,3,3,'S');
+    doc.setFillColor(rc.border[0],rc.border[1],rc.border[2]);
+    doc.rect(margin,y,3.5,rsBoxH,'F');
+
+    doc.setTextColor(rc.text[0],rc.text[1],rc.text[2]);
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text('STATUS: '+rc.label, margin+7, y+6.5);
+
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+    let ry = y+12;
+    doc.text(lamaLines, margin+7, ry); ry += lamaLines.length*4.3;
+    doc.text(baruLines, margin+7, ry); ry += baruLines.length*4.3;
+    doc.text(alasanLines, margin+7, ry);
+
+    y += rsBoxH + 4;
+  }
 
   drawSectionHeader('DOKUMEN DILAMPIRKAN');
   const dokLines=doc.splitTextToSize(d.dokumen||'-',contentW-12);
