@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BAP Online | Kantor Imigrasi Kelas I Tanjungpinang</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══ LANDING ═══ -->
+<div id="landingPage">
+  <div class="hero">
+    <div class="hero-bg-layer"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-lines"></div>
+    <div class="govt-bar">
+      <div class="logo-wrap">
+        <img src="logo_imigrasi.png" alt="Logo Imigrasi" onerror="this.style.display='none';this.parentElement.innerHTML='<svg viewBox=\'0 0 36 36\' fill=\'none\' width=\'34\' height=\'34\'><circle cx=\'18\' cy=\'18\' r=\'17\' stroke=\'#FFF\' stroke-width=\'1.5\' fill=\'rgba(3,105,161,0.3)\'/><text x=\'18\' y=\'24\' font-size=\'14\' font-weight=\'900\' text-anchor=\'middle\' fill=\'#FFF\' font-family=\'serif\'>🦅</text></svg>'">
+      </div>
+      <div class="govt-text-wrap">
+        <div class="govt-name">Kantor Imigrasi Kelas I TPI Tanjungpinang</div>
+        <div class="govt-sub">Intelijen Dan Penindakan Keimigrasian</div>
+      </div>
+      <div class="govt-bar-right">Tanjungpinang<br>Kepulauan Riau</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Layanan Digital Imigrasi</div>
+      <div class="hero-app-name">BAP<span class="accent"> ONLINE</span></div>
+      <div class="hero-full-name">Kantor Imigrasi Kelas I TPI Tanjungpinang</div>
+      <p class="hero-tagline">Daftarkan jadwal Berita Acara Pemeriksaan secara online — mudah, cepat, dan tanpa antri.</p>
+      <div class="user-logged-bar" id="userLoggedBar">
+        <div class="avatar">👤</div>
+        <div class="user-info">
+          <div class="user-name" id="landingUserName">—</div>
+          <div class="user-nik" id="landingUserNik">—</div>
+        </div>
+        <button class="btn-logout" onclick="doLogout()">Keluar</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-chip"><div class="n">4</div><div class="l">Langkah</div></div>
+        <div class="stat-chip"><div class="n">~5</div><div class="l">Menit</div></div>
+        <div class="stat-chip"><div class="n">24/7</div><div class="l">Online</div></div>
+      </div>
+      <button class="cta-primary" onclick="onCtaClick()">
+        <svg class="cta-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M10 14L21 3M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg>
+        <span class="cta-label">Mulai Pendaftaran BAP</span>
+      </button>
+      <p class="cta-hint">Gratis &nbsp;·&nbsp; Login wajib &nbsp;·&nbsp; Hanya ~5 menit</p>
+    </div>
+  </div>
+
+  <svg class="wave-sep" viewBox="0 0 390 40" preserveAspectRatio="none">
+    <path d="M0 40 C80 8 310 48 390 12 L390 0 L0 0 Z" fill="#0EA5E9"/>
+    <path d="M0 40 C100 14 280 50 390 16 L390 40 Z" fill="#F0F9FF"/>
+  </svg>
+
+  <div class="landing-body">
+    <div class="section-eyebrow">Fitur Utama</div>
+    <h2 class="section-heading">Semua dalam<br>satu genggaman</h2>
+    <div class="feature-grid">
+      <div class="feat-card"><div class="feat-icon">📋</div><h3>Data Diri</h3><p>Isi identitas dan jenis permohonan</p></div>
+      <div class="feat-card"><div class="feat-icon">🗓️</div><h3>Pilih Jadwal</h3><p>Slot real-time, cek ketersediaan langsung</p></div>
+      <div class="feat-card"><div class="feat-icon">📎</div><h3>Upload Dokumen</h3><p>Foto langsung dari kamera HP Anda</p></div>
+      <div class="feat-card"><div class="feat-icon">🔄</div><h3>Reschedule</h3><p>Ajukan ganti jadwal jika ada keperluan mendesak</p></div>
+    </div>
+    <div class="section-eyebrow">Alur Pendaftaran</div>
+    <div class="steps-list">
+      <div class="step-item"><div class="step-num-badge">1</div><div><h4>Buat Akun / Login</h4><p>Daftar dengan NIK untuk keamanan data Anda</p></div></div>
+      <div class="step-item"><div class="step-num-badge">2</div><div><h4>Isi Formulir BAP</h4><p>Lengkapi data, pilih jadwal, upload dokumen</p></div></div>
+      <div class="step-item"><div class="step-num-badge">3</div><div><h4>Terima Konfirmasi</h4><p>Petugas menghubungi via WhatsApp</p></div></div>
+      <div class="step-item"><div class="step-num-badge">4</div><div><h4>Datang Tepat Waktu</h4><p>Bawa dokumen asli sesuai jadwal</p></div></div>
+    </div>
+    <div class="notice-box">
+      <span style="font-size:17px;flex-shrink:0;margin-top:1px;">ℹ️</span>
+      <span>Setiap NIK <strong>hanya bisa mendaftar satu kali</strong>. Pastikan data yang diisi benar dan lengkap. Pendaftaran <strong>tidak menggantikan</strong> kewajiban hadir ke kantor.</span>
+    </div>
+    <button class="cta-primary" onclick="onCtaClick()">
+      <svg class="cta-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M10 14L21 3M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg>
+      <span class="cta-label">Mulai Pendaftaran BAP</span>
+    </button>
+    <p style="text-align:center;font-size:11px;color:var(--gray-4);margin-top:10px;">Gratis &nbsp;·&nbsp; Login wajib &nbsp;·&nbsp; Hanya ~5 menit</p>
+  </div>
+</div>
+
+<!-- ═══ AUTH ═══ -->
+<div id="authPage">
+  <div class="auth-bg"></div>
+  <div class="auth-pattern"></div>
+  <div class="auth-orb1"></div>
+  <div class="auth-orb2"></div>
+  <div class="auth-container">
+    <div class="auth-top">
+      <button class="auth-back-btn" onclick="showLanding()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </button>
+      <div>
+        <div class="auth-brand">BAP<span class="accent">ONLINE</span></div>
+        <div class="auth-brand-sub">Layanan Digital Imigrasi</div>
+      </div>
+    </div>
+    <div id="loginPanel">
+      <div class="auth-card">
+        <div class="auth-icon">🔐</div>
+        <div class="auth-title">Masuk ke Akun</div>
+        <div class="auth-subtitle">Login dengan NIK dan password Anda untuk mengakses pendaftaran BAP.</div>
+        <div class="auth-alert" id="loginAlert"><span id="loginAlertIcon">⚠️</span><span id="loginAlertMsg"></span></div>
+        <div class="auth-field">
+          <label class="auth-label">NIK (16 Digit)</label>
+          <input type="tel" class="auth-input" id="loginNik" placeholder="Masukkan 16 digit NIK" maxlength="16" inputmode="numeric">
+          <div class="auth-err" id="err-loginNik">NIK wajib diisi (16 digit)</div>
+        </div>
+        <div class="auth-field" style="margin-bottom:20px;">
+          <label class="auth-label">Password</label>
+          <input type="password" class="auth-input" id="loginPassword" placeholder="Masukkan password" onkeydown="if(event.key==='Enter')doLogin()">
+          <div class="auth-err" id="err-loginPassword">Password wajib diisi</div>
+        </div>
+        <button class="btn-auth" id="btnLogin" onclick="doLogin()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+          Masuk
+        </button>
+      </div>
+      <div class="auth-switch">Belum punya akun? <a onclick="showRegister()">Daftar Sekarang</a></div>
+    </div>
+    <div id="registerPanel" style="display:none;">
+      <div class="auth-card">
+        <div class="auth-icon">📝</div>
+        <div class="auth-title">Buat Akun Baru</div>
+        <div class="auth-subtitle">Daftarkan diri dengan NIK sebagai username unik Anda.</div>
+        <div class="auth-alert" id="registerAlert"><span id="registerAlertIcon">⚠️</span><span id="registerAlertMsg"></span></div>
+        <div class="auth-field">
+          <label class="auth-label">Nama Lengkap</label>
+          <input type="text" class="auth-input" id="regNama" placeholder="Sesuai dokumen resmi" autocomplete="name">
+          <div class="auth-err" id="err-regNama">Nama lengkap wajib diisi</div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">NIK (16 Digit)</label>
+          <input type="tel" class="auth-input" id="regNik" placeholder="16 digit Nomor Induk Kependudukan" maxlength="16" inputmode="numeric">
+          <div class="auth-err" id="err-regNik">NIK harus 16 digit</div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Tanggal Lahir</label>
+          <input type="date" class="auth-input" id="regTglLahir">
+          <div class="auth-err" id="err-regTglLahir">Tanggal lahir wajib diisi</div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Jenis Kelamin</label>
+          <select class="auth-input" id="regJK">
+            <option value="">-- Pilih --</option>
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+          <div class="auth-err" id="err-regJK">Jenis kelamin wajib dipilih</div>
+        </div>
+        <div class="auth-field" style="margin-bottom:20px;">
+          <label class="auth-label">Password (min. 6 karakter)</label>
+          <input type="password" class="auth-input" id="regPassword" placeholder="Buat password yang kuat">
+          <div class="auth-err" id="err-regPassword">Password minimal 6 karakter</div>
+        </div>
+        <button class="btn-auth" id="btnRegister" onclick="doRegister()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM19 8v6M22 11h-6"/></svg>
+          Daftar Sekarang
+        </button>
+      </div>
+      <div class="auth-switch">Sudah punya akun? <a onclick="showLogin()">Masuk di sini</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ USER DASHBOARD ═══ -->
+<div id="userDashboardPage">
+  <div class="dashboard-header">
+    <button class="dashboard-back-btn" onclick="showLanding()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="header-logo-sm">
+      <img src="logo_imigrasi.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='🦅'">
+    </div>
+    <div class="header-info">
+      <div class="header-title">Dashboard Saya</div>
+      <div class="header-sub">Status Pendaftaran BAP</div>
+    </div>
+    <div class="header-user-chip">
+      <div class="dot"></div>
+      <span id="dashHeaderName">—</span>
+    </div>
+  </div>
+  <div class="dashboard-content">
+    <div class="dash-hero">
+      <div class="dash-hero-top">
+        <div>
+          <div class="dash-greeting">Selamat datang,</div>
+          <div class="dash-name" id="dashUserName">—</div>
+        </div>
+        <button class="dash-logout-btn" onclick="doLogout()">Keluar</button>
+      </div>
+      <div class="dash-nik-pill">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        NIK: <span id="dashUserNik">—</span>
+      </div>
+    </div>
+
+    <div id="dashLoadingState" class="loading-dash">
+      <div class="mini-spin"></div>
+      <p>Memuat data pendaftaran...</p>
+    </div>
+
+    <div id="dashContent" style="display:none;">
+      <div class="dash-section-title">Status Pendaftaran BAP</div>
+      <div id="regCardContainer"></div>
+      <div id="noRegState" class="empty-state" style="display:none;">
+        <div class="empty-icon">📋</div>
+        <div class="empty-title">Belum Ada Pendaftaran</div>
+        <div class="empty-desc">Anda belum memiliki pendaftaran BAP aktif. Mulai pendaftaran sekarang untuk menjadwalkan pemeriksaan Anda.</div>
+        <button class="btn-start-reg" onclick="goToRegistration()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:middle;margin-right:6px"><path d="M12 5v14M5 12h14"/></svg>
+          Daftar BAP Sekarang
+        </button>
+      </div>
+    </div>
+
+    <div style="height:32px;"></div>
+  </div>
+</div>
+
+<!-- ═══ MAIN APP ═══ -->
+<div id="mainApp">
+  <div class="app-header">
+    <button class="header-back-btn" onclick="backToLanding()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="header-logo-sm">
+      <img src="logo_imigrasi.png" alt="Logo Imigrasi" onerror="this.style.display='none';this.parentElement.innerHTML='<svg viewBox=\'0 0 28 28\' fill=\'none\' width=\'26\' height=\'26\'><circle cx=\'14\' cy=\'14\' r=\'13\' stroke=\'rgba(255,255,255,0.5)\' stroke-width=\'1\' fill=\'rgba(255,255,255,0.15)\'/><text x=\'14\' y=\'19\' font-size=\'11\' text-anchor=\'middle\' fill=\'#FFF\' font-family=\'serif\'>🦅</text></svg>'">
+    </div>
+    <div class="header-info">
+      <div class="header-title">Pendaftaran BAP</div>
+      <div class="header-sub">Kantor Imigrasi Kelas I TPI Tanjungpinang</div>
+    </div>
+    <div class="header-user-chip">
+      <div class="dot"></div>
+      <span id="headerUserName">—</span>
+    </div>
+  </div>
+
+  <div class="stepper-bar">
+    <div class="stepper">
+      <div class="stp-item"><div class="stp-circle" id="sc1">1</div><div class="stp-label" id="sl1">Data Diri</div></div>
+      <div class="stp-line" id="line1"></div>
+      <div class="stp-item"><div class="stp-circle" id="sc2">2</div><div class="stp-label" id="sl2">Jadwal</div></div>
+      <div class="stp-line" id="line2"></div>
+      <div class="stp-item"><div class="stp-circle" id="sc3">3</div><div class="stp-label" id="sl3">Dokumen</div></div>
+      <div class="stp-line" id="line3"></div>
+      <div class="stp-item"><div class="stp-circle" id="sc4">4</div><div class="stp-label" id="sl4">Konfirmasi</div></div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="page-content" data-step="1" id="step1">
+    <div class="form-card">
+      <div class="card-head"><div class="card-head-dot"></div>Data Pribadi</div>
+      <div class="field">
+        <label class="field-label">Nama Lengkap *</label>
+        <input type="text" id="nama" placeholder="Sesuai paspor / dokumen resmi" autocomplete="name">
+        <div class="err-msg" id="err-nama">Nama lengkap wajib diisi (min. 3 karakter)</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Tempat Lahir *</label>
+        <input type="text" id="tempatLahir" placeholder="Contoh: Tanjungpinang">
+        <div class="err-msg" id="err-tempatLahir">Tempat lahir wajib diisi</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Tanggal Lahir *</label>
+        <input type="date" id="tanggalLahir">
+        <div class="err-msg" id="err-tanggalLahir">Tanggal lahir wajib diisi</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Jenis Kelamin *</label>
+        <select id="jenisKelamin">
+          <option value="">-- Pilih --</option>
+          <option value="Laki-laki">Laki-laki</option>
+          <option value="Perempuan">Perempuan</option>
+        </select>
+        <div class="err-msg" id="err-jenisKelamin">Jenis kelamin wajib dipilih</div>
+      </div>
+      <div class="field">
+        <label class="field-label">No. HP / WhatsApp *</label>
+        <input type="tel" id="hp" placeholder="08xxxxxxxxxx" inputmode="numeric">
+        <div class="err-msg" id="err-hp">Nomor HP wajib diisi (min. 8 digit)</div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="card-head"><div class="card-head-dot"></div>Data Permohonan</div>
+      <div class="field">
+        <label class="field-label">Jenis Permohonan *</label>
+        <select id="jenisPermohonan" onchange="onJenisChange()">
+          <option value="">-- Pilih Jenis BAP --</option>
+          <option value="BAP Paspor Rusak">BAP Paspor Rusak</option>
+          <option value="BAP Paspor Hilang">BAP Paspor Hilang</option>
+          <option value="BAP Perubahan Data">BAP Perubahan Data</option>
+        </select>
+        <div class="err-msg" id="err-jenis_permohonan">Jenis permohonan wajib dipilih</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Jenis Paspor *</label>
+        <select id="jenisPaspor">
+          <option value="">-- Pilih --</option>
+          <option value="Paspor Biasa 5Th">Paspor Biasa 5 Tahun</option>
+          <option value="Paspor Biasa 10Th">Paspor Biasa 10 Tahun</option>
+          <option value="Paspor Elektronik 5Th">Paspor Elektronik 5 Tahun</option>
+          <option value="Paspor Elektronik 10Th">Paspor Elektronik 10 Tahun</option>
+        </select>
+        <div class="err-msg" id="err-jenis_paspor">Jenis paspor wajib dipilih</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Tujuan Pembuatan *</label>
+        <textarea id="tujuan" placeholder="Jelaskan tujuan pembuatan paspor..."></textarea>
+        <div class="err-msg" id="err-tujuan">Tujuan pembuatan wajib diisi (min. 5 karakter)</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-next" onclick="goStep(2)">Lanjut →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="page-content" data-step="2" id="step2">
+    <div class="form-card">
+      <div class="slot-section-head">🗓️ Pilih Jadwal Kedatangan</div>
+      <p class="slot-section-sub">Pilih tanggal lalu sesi yang tersedia. Setiap sesi hanya tersedia <strong>2 slot</strong>.</p>
+      <div class="field" style="margin-bottom:10px;">
+        <label class="field-label">Tanggal Kedatangan</label>
+        <input type="date" id="tanggal" onchange="onDateChange()">
+      </div>
+      <div id="slotArea">
+        <div class="slot-loading"><div class="mini-spin"></div><p>Silakan pilih tanggal</p></div>
+      </div>
+      <div class="err-msg" id="err-slot" style="margin-top:8px;">Pilih sesi jadwal terlebih dahulu</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(1)">← Kembali</button>
+      <button class="btn btn-next" onclick="goStep(3)">Lanjut →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="page-content" data-step="3" id="step3">
+    <div class="form-card">
+      <div class="card-head"><div class="card-head-dot"></div>Upload Dokumen</div>
+      <div class="upload-alert">📸 Foto langsung dari kamera HP atau pilih dari galeri. Format <strong>JPG / PNG</strong>, maks. <strong>10MB</strong> per file (auto-compress sebelum upload).</div>
+      <div class="doc-group">
+        <div class="doc-group-title">Dokumen Wajib</div>
+        <div class="upload-item" id="item-ktp">
+          <div class="upload-label-row"><label class="field-label">E-KTP</label><span class="tag-req">Wajib</span></div>
+          <div class="upload-box-v2" id="up-ktp">
+            <input type="file" id="file-ktp" accept="image/*"onchange="handleFileNew(this,'ktp')">
+            <div class="upload-trigger" id="trigger-ktp">
+              <div class="upload-trigger-icon">🪪</div>
+              <div class="upload-trigger-text"><div class="upload-trigger-title">Foto / Scan E-KTP</div><div class="upload-trigger-sub">Tap untuk memilih atau foto langsung</div></div>
+              <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+            </div>
+            <div class="upload-progress-wrap" id="prog-ktp" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-ktp" style="width:30%"></div></div></div>
+            <div class="preview-card" id="preview-ktp" style="display:none;"></div>
+          </div>
+          <div class="file-alert" id="filealert-ktp"></div>
+          <div class="err-msg" id="err-ktp">E-KTP wajib diupload</div>
+        </div>
+        <div class="upload-item" id="item-kk" style="margin-top:12px;">
+          <div class="upload-label-row"><label class="field-label">Kartu Keluarga</label><span class="tag-req">Wajib</span></div>
+          <div class="upload-box-v2" id="up-kk">
+            <input type="file" id="file-kk" accept="image/*"  onchange="handleFileNew(this,'kk')">
+            <div class="upload-trigger" id="trigger-kk">
+              <div class="upload-trigger-icon">👨‍👩‍👧‍👦</div>
+              <div class="upload-trigger-text"><div class="upload-trigger-title">Foto / Scan Kartu Keluarga</div><div class="upload-trigger-sub">Tap untuk memilih atau foto langsung</div></div>
+              <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+            </div>
+            <div class="upload-progress-wrap" id="prog-kk" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-kk" style="width:30%"></div></div></div>
+            <div class="preview-card" id="preview-kk" style="display:none;"></div>
+          </div>
+          <div class="file-alert" id="filealert-kk"></div>
+          <div class="err-msg" id="err-kk">Kartu Keluarga wajib diupload</div>
+        </div>
+        <div class="upload-item" id="item-akta" style="margin-top:12px;">
+          <div class="upload-label-row"><label class="field-label">Akta / Ijazah / Buku Nikah</label><span class="tag-req">Wajib</span></div>
+          <div class="upload-box-v2" id="up-akta">
+            <input type="file" id="file-akta" accept="image/*"  onchange="handleFileNew(this,'akta')">
+            <div class="upload-trigger" id="trigger-akta">
+              <div class="upload-trigger-icon">📜</div>
+              <div class="upload-trigger-text"><div class="upload-trigger-title">Akta / Ijazah / Buku Nikah</div><div class="upload-trigger-sub">Pilih salah satu dokumen pendukung</div></div>
+              <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+            </div>
+            <div class="upload-progress-wrap" id="prog-akta" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-akta" style="width:30%"></div></div></div>
+            <div class="preview-card" id="preview-akta" style="display:none;"></div>
+          </div>
+          <div class="file-alert" id="filealert-akta"></div>
+          <div class="err-msg" id="err-akta">Dokumen akta/ijazah/buku nikah wajib diupload</div>
+        </div>
+      </div>
+      <!-- Conditional docs -->
+      <div class="doc-group" id="grp-rusak" style="display:none;">
+        <div class="doc-group-title">Khusus — Paspor Rusak</div>
+        <div class="conditional-info">📋 Lampirkan foto paspor yang rusak.</div>
+        <div class="upload-item" id="item-fotoPaspor">
+          <div class="upload-label-row"><label class="field-label">Foto Paspor Rusak</label><span class="tag-req">Wajib</span></div>
+          <div class="upload-box-v2" id="up-fotoPaspor">
+            <input type="file" id="file-fotoPaspor" accept="image/*"  onchange="handleFileNew(this,'fotoPaspor')">
+            <div class="upload-trigger" id="trigger-fotoPaspor">
+              <div class="upload-trigger-icon">📕</div>
+              <div class="upload-trigger-text"><div class="upload-trigger-title">Foto Paspor yang Rusak</div><div class="upload-trigger-sub">Foto paspor yang rusak</div></div>
+              <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+            </div>
+            <div class="upload-progress-wrap" id="prog-fotoPaspor" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-fotoPaspor" style="width:30%"></div></div></div>
+            <div class="preview-card" id="preview-fotoPaspor" style="display:none;"></div>
+          </div>
+          <div class="file-alert" id="filealert-fotoPaspor"></div>
+          <div class="err-msg" id="err-fotoPaspor">Foto paspor rusak wajib diupload</div>
+        </div>
+      </div>
+      <div class="doc-group" id="grp-hilang" style="display:none;">
+        <div class="doc-group-title">Khusus — Paspor Hilang</div>
+        <div class="conditional-info">📋 Jika paspor hilang tidak berkaitan dengan bencana alam, wajib melampirkan Surat Kehilangan dari Kepolisian. Jika paspor hilang akibat bencana alam wajib melampirkan Surat Keterangan dari Kelurahan</div>
+        <div class="field" style="margin-bottom:12px;">
+          <label class="field-label">Jenis Surat</label>
+          <select id="jenisSuratHilang" onchange="renderSuratHilang()">
+            <option value="">-- Pilih --</option>
+            <option value="polisi">Surat dari Kepolisian</option>
+            <option value="kelurahan">Surat dari Kelurahan (Bencana)</option>
+          </select>
+        </div>
+        <div id="wrap-suratPolisi" style="display:none;">
+          <div class="upload-item" id="item-suratPolisi">
+            <div class="upload-label-row"><label class="field-label">Surat Kepolisian</label><span class="tag-req">Wajib</span></div>
+            <div class="upload-box-v2" id="up-suratPolisi">
+              <input type="file" id="file-suratPolisi" accept="image/*"  onchange="handleFileNew(this,'suratPolisi')">
+              <div class="upload-trigger" id="trigger-suratPolisi">
+                <div class="upload-trigger-icon">🚔</div>
+                <div class="upload-trigger-text"><div class="upload-trigger-title">Surat dari Kepolisian</div><div class="upload-trigger-sub">Surat resmi kantor polisi</div></div>
+                <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+              </div>
+              <div class="upload-progress-wrap" id="prog-suratPolisi" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-suratPolisi" style="width:30%"></div></div></div>
+              <div class="preview-card" id="preview-suratPolisi" style="display:none;"></div>
+            </div>
+            <div class="file-alert" id="filealert-suratPolisi"></div>
+            <div class="err-msg" id="err-suratPolisi">Surat keterangan dari kepolisian wajib diupload</div>
+          </div>
+        </div>
+        <div id="wrap-suratKelurahan" style="display:none;">
+          <div class="upload-item" id="item-suratKelurahan">
+            <div class="upload-label-row"><label class="field-label">Surat Kelurahan</label><span class="tag-req">Wajib</span></div>
+            <div class="upload-box-v2" id="up-suratKelurahan">
+              <input type="file" id="file-suratKelurahan" accept="image/*"  onchange="handleFileNew(this,'suratKelurahan')">
+              <div class="upload-trigger" id="trigger-suratKelurahan">
+                <div class="upload-trigger-icon">🏢</div>
+                <div class="upload-trigger-text"><div class="upload-trigger-title">Surat dari Kelurahan</div><div class="upload-trigger-sub">Surat kehilangan akibat bencana</div></div>
+                <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+              </div>
+              <div class="upload-progress-wrap" id="prog-suratKelurahan" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-suratKelurahan" style="width:30%"></div></div></div>
+              <div class="preview-card" id="preview-suratKelurahan" style="display:none;"></div>
+            </div>
+            <div class="file-alert" id="filealert-suratKelurahan"></div>
+            <div class="err-msg" id="err-suratKelurahan">Surat keterangan dari kelurahan wajib diupload</div>
+          </div>
+        </div>
+        <div class="err-msg" id="err-jenisSuratHilang">Pilih jenis surat keterangan</div>
+      </div>
+      <div class="doc-group" id="grp-perubahan" style="display:none;">
+        <div class="doc-group-title">Khusus — Perubahan Data</div>
+        <div class="conditional-info">📋 Lampirkan surat resmi dari instansi pemerintah yang menjadi dasar perubahan data.</div>
+        <div class="upload-item" id="item-suratPemerintah">
+          <div class="upload-label-row"><label class="field-label">Surat dari Pemerintah</label><span class="tag-req">Wajib</span></div>
+          <div class="upload-box-v2" id="up-suratPemerintah">
+            <input type="file" id="file-suratPemerintah" accept="image/*"  onchange="handleFileNew(this,'suratPemerintah')">
+            <div class="upload-trigger" id="trigger-suratPemerintah">
+              <div class="upload-trigger-icon">🏛️</div>
+              <div class="upload-trigger-text"><div class="upload-trigger-title">Surat Resmi dari Pemerintah</div><div class="upload-trigger-sub">Surat penetapan / surat dinas terkait</div></div>
+              <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+            </div>
+            <div class="upload-progress-wrap" id="prog-suratPemerintah" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-suratPemerintah" style="width:30%"></div></div></div>
+            <div class="preview-card" id="preview-suratPemerintah" style="display:none;"></div>
+          </div>
+          <div class="file-alert" id="filealert-suratPemerintah"></div>
+          <div class="err-msg" id="err-suratPemerintah">Surat dari pemerintah wajib diupload</div>
+        </div>
+      </div>
+      <div class="doc-group" style="margin-top:4px;">
+        <div class="doc-group-title">Dokumen Tambahan</div>
+        <div class="upload-item" id="item-pendukung">
+          <div class="upload-label-row"><label class="field-label">Dok. Pendukung</label><span class="tag-opt">Opsional</span></div>
+          <div class="upload-box-v2" id="up-pendukung">
+            <input type="file" id="file-pendukung" accept="image/*"  onchange="handleFileNew(this,'pendukung')">
+            <div class="upload-trigger" id="trigger-pendukung">
+              <div class="upload-trigger-icon">📄</div>
+              <div class="upload-trigger-text"><div class="upload-trigger-title">Bukti / Surat Pendukung</div><div class="upload-trigger-sub">Dokumen tambahan (opsional)</div></div>
+              <div class="camera-badge-row"><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Kamera</span><span class="camera-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Galeri</span></div>
+            </div>
+            <div class="upload-progress-wrap" id="prog-pendukung" style="display:none;"><div class="upload-progress-label"><div class="upload-spinner"></div>Mengupload dokumen...</div><div class="upload-progress-bg"><div class="upload-progress-fill" id="progfill-pendukung" style="width:30%"></div></div></div>
+            <div class="preview-card" id="preview-pendukung" style="display:none;"></div>
+          </div>
+          <div class="file-alert" id="filealert-pendukung"></div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack3" onclick="goStep(2)">← Kembali</button>
+      <button class="btn btn-next" id="btnNext3" onclick="goStep(4)">Lanjut →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="page-content" data-step="4" id="step4">
+    <div class="form-card">
+      <div class="summary-title">✅ Ringkasan Pendaftaran</div>
+      <div class="summary-row"><span class="sum-key">Akun (NIK)</span><span class="sum-val" id="sum-nik"></span></div>
+      <div class="summary-row"><span class="sum-key">Nama</span><span class="sum-val" id="sum-nama"></span></div>
+      <div class="summary-row"><span class="sum-key">Tempat / Tgl Lahir</span><span class="sum-val" id="sum-ttl"></span></div>
+      <div class="summary-row"><span class="sum-key">Jenis Kelamin</span><span class="sum-val" id="sum-jk"></span></div>
+      <div class="summary-row"><span class="sum-key">No. HP</span><span class="sum-val" id="sum-hp"></span></div>
+      <div class="summary-row"><span class="sum-key">Jenis Permohonan</span><span class="sum-val" id="sum-jenis_permohonan"></span></div>
+      <div class="summary-row"><span class="sum-key">Jenis Paspor</span><span class="sum-val" id="sum-jenis_paspor"></span></div>
+      <div class="summary-row"><span class="sum-key">Jadwal</span><span class="sum-val" id="sum-jadwal"></span></div>
+      <div class="summary-row"><span class="sum-key">Dokumen Diupload</span><span class="sum-val" id="sum-dok"></span></div>
+    </div>
+    <div class="warn-box"><span>⚠️</span><span>Pastikan semua data sudah benar. <strong>1 NIK hanya bisa mendaftar 1 kali</strong> dan tidak dapat diubah setelah dikirim.</span></div>
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="goStep(3)" style="flex:0 0 auto;padding:14px 16px;">← Kembali</button>
+      <button class="btn btn-submit" id="btnSubmit" onclick="submitForm()">✓ Kirim Pendaftaran</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESCHEDULE MODAL ═══ -->
+<div id="rescheduleModal">
+  <div class="rs-modal-sheet">
+    <div class="rs-modal-handle"></div>
+    <div class="rs-modal-header">
+      <div class="rs-modal-title">🔄 Ajukan Reschedule</div>
+      <div class="rs-modal-sub">Pilih jadwal baru dan berikan alasan. Maks. 1 kali reschedule.</div>
+    </div>
+    <div class="rs-modal-body">
+      <div class="rs-current-sched">
+        <span style="font-size:16px;flex-shrink:0">📅</span>
+        <div><strong>Jadwal Saat Ini:</strong><br><span id="rsCurrentSched">—</span></div>
+      </div>
+      <div class="rs-note-box">
+        <span style="font-size:16px;flex-shrink:0">⚠️</span>
+        <span>Reschedule hanya dapat dilakukan <strong>1 kali</strong>. Jadwal baru berlaku setelah disetujui oleh petugas.</span>
+      </div>
+      <div class="rs-field">
+        <label class="rs-label">Tanggal Baru</label>
+        <input type="date" id="rsTanggal" onchange="onRsDateChange()">
+        <div class="err-msg" id="err-rsTanggal">Pilih tanggal baru</div>
+      </div>
+      <div class="rs-field">
+        <label class="rs-label">Pilih Sesi Baru</label>
+        <div id="rsSlotArea"><div class="slot-loading" style="padding:16px"><p style="color:var(--gray-4)">Silakan pilih tanggal terlebih dahulu</p></div></div>
+        <div class="err-msg" id="err-rsSlot">Pilih sesi jadwal baru</div>
+      </div>
+      <div class="rs-field">
+        <label class="rs-label">Alasan Reschedule *</label>
+        <textarea id="rsAlasan" placeholder="Jelaskan alasan Anda mengajukan perubahan jadwal..." style="min-height:80px;"></textarea>
+        <div class="err-msg" id="err-rsAlasan">Alasan reschedule wajib diisi (min. 10 karakter)</div>
+      </div>
+    </div>
+    <div class="rs-modal-footer">
+      <button class="btn-rs-cancel" onclick="closeRescheduleModal()">Batal</button>
+      <button class="btn-rs-submit" id="btnRsSubmit" onclick="submitReschedule()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.08 6.08l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        Kirim Permintaan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loadingOverlay">
+  <div class="loading-modal">
+    <div class="dual-ring"><div class="dual-ring-outer"></div><div class="dual-ring-inner"></div></div>
+    <h3 id="loadingTitle">Memproses...</h3>
+    <p>Mohon tunggu sebentar</p>
+    <div class="loading-status" id="loadingStatus">Menyiapkan data...</div>
+    <div class="dots-wrap"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div id="successOverlay">
+  <div class="success-modal">
+    <div class="success-icon-wrap">
+      <svg width="42" height="42" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="26" fill="#D0F0E0"/>
+        <path class="check-svg-path" d="M14 26L22 34L38 18" stroke="#0A5C35" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <h2>Berhasil Terdaftar! 🎉</h2>
+    <p class="desc">Pendaftaran BAP Anda telah diterima. Petugas imigrasi akan segera menghubungi Anda.</p>
+    <div class="reg-number-box">
+      <div class="reg-label">Nomor Registrasi</div>
+      <div class="reg-code" id="regCode">—</div>
+    </div>
+    <div class="whatsapp-notice">
+      <div class="pulse-dot"></div>
+      <div>Tunggu <strong>konfirmasi dari petugas imigrasi</strong> melalui WhatsApp. Hadir tepat waktu dengan membawa dokumen asli.</div>
+    </div>
+    <button class="btn-dl-pdf" onclick="downloadBuktiPDF()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Bukti Pendaftaran (PDF)
+    </button>
+    <button class="btn-back-home" onclick="goToDashboard()">Lihat Status Pendaftaran →</button>
+  </div>
+</div>
+
+<!-- Reschedule Success Toast -->
+<div id="rsSuccessToast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  Permintaan reschedule berhasil dikirim!
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
