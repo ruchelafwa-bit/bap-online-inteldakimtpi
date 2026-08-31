@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════
    CONFIG
 ══════════════════════════════════════════════ */
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuJ7CxvxdasFBiSXjXCk_ETKPipvDclLsdAX0QL6ObXcCXsqDGWuMT0_NiVnJwLFVK/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7BnKbxAQVrhgwWAP6kFIOmpXiM4WBi2a3JSc9-LtD1IKiHQWV-VKpJJ0zRza4gfKi/exec';
 const CLOUDINARY_URL  = 'https://api.cloudinary.com/v1_1/df5axirwx/upload';
 const UPLOAD_PRESET   = 'bap_upload_preset';
 const MAX_FILE_SIZE   = 10 * 1024 * 1024;
