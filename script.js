@@ -642,7 +642,7 @@ async function doQuickTrack() {
   const query = document.getElementById('quickTrackInput').value.trim();
   const resBox = document.getElementById('quickTrackResult');
   if (!query) {
-    showToast('warning', 'Input Kosong', 'Masukkan NIK 16 digit atau Nomor Registrasi BAP.');
+    showToast('warning', 'Input Kosong', 'Masukkan NIK 16 digit.');
     return;
   }
 
